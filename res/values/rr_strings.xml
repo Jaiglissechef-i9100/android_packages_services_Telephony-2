@@ -26,4 +26,9 @@
     <string name="proximity_mode_title">Enable proximity sensor</string>
     <string name="proximity_on_summary">When in call, use proximity sensor to turn off screen</string>
     <string name="proximity_off_summary">When in call, the screen will remain on</string>
+    
+    <!-- Call recording format -->
+    <string name="call_recording_format">Call recording format</string>
+    <string name="wb_amr_format" translatable="false">AMR-WB</string>
+    <string name="aac_format" translatable="false">AAC</string>
 </resources>
