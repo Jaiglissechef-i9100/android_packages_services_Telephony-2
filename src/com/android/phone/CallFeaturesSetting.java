@@ -39,7 +39,6 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
-import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
@@ -107,7 +106,6 @@ public class CallFeaturesSetting extends PreferenceActivity
             "phone_account_settings_preference_screen";
 
     private static final String ENABLE_VIDEO_CALLING_KEY = "button_enable_video_calling";
-    private static final String BUTTON_PROXIMITY_KEY   = "button_proximity_key";
 
     private Phone mPhone;
     private SubscriptionInfoHelper mSubscriptionInfoHelper;
@@ -116,7 +114,6 @@ public class CallFeaturesSetting extends PreferenceActivity
     private SwitchPreference mButtonAutoRetry;
     private PreferenceScreen mVoicemailSettingsScreen;
     private SwitchPreference mButtonProximity;
-
     private SwitchPreference mEnableVideoCalling;
     
     // Call recording format
@@ -192,8 +189,6 @@ public class CallFeaturesSetting extends PreferenceActivity
         super.onCreate(icicle);
         if (DBG) log("onCreate: Intent is " + getIntent());
 
-        PreferenceScreen preferenceScreen = getPreferenceScreen();
-
         // Make sure we are running as an admin user.
         if (!UserManager.get(this).isAdminUser()) {
             Toast.makeText(this, R.string.call_settings_admin_user_only,
@@ -207,15 +202,6 @@ public class CallFeaturesSetting extends PreferenceActivity
                 getActionBar(), getResources(), R.string.call_settings_with_label);
         mPhone = mSubscriptionInfoHelper.getPhone();
         mTelecomManager = TelecomManager.from(this);
-
-        if (mButtonProximity != null) {
-            if (getResources().getBoolean(R.bool.config_proximity_enable)) {
-                mButtonProximity.setOnPreferenceChangeListener(this);
-            } else {
-                getPreferenceScreen().removePreference(mButtonProximity);
-                mButtonProximity = null;
-            }
-        }
     }
 
     private final PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
@@ -278,8 +264,6 @@ public class CallFeaturesSetting extends PreferenceActivity
             prefSet.removePreference(mButtonAutoRetry);
             mButtonAutoRetry = null;
         }
-
-        mButtonProximity = (SwitchPreference) findPreference(BUTTON_PROXIMITY_KEY);
 
         Preference cdmaOptions = prefSet.findPreference(BUTTON_CDMA_OPTIONS);
         Preference gsmOptions = prefSet.findPreference(BUTTON_GSM_UMTS_OPTIONS);
@@ -449,14 +433,6 @@ public class CallFeaturesSetting extends PreferenceActivity
             } else {
                 prefSet.removePreference(mCallRecordingFormat);
             }
-        }
-
-        if (mButtonProximity != null) {
-            boolean checked = Settings.System.getInt(getContentResolver(),
-                    Settings.System.IN_CALL_PROXIMITY_SENSOR, 1) == 1;
-            mButtonProximity.setChecked(checked);
-            mButtonProximity.setSummary(checked ? R.string.proximity_on_summary
-                    : R.string.proximity_off_summary);
         }
     }
 
