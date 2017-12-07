@@ -38,7 +38,7 @@
   <!-- In-call screen: status label when MO call gets deflected to another party -->
   <string name="call_notif_call_deflected">由遠端系統啟用通話轉接</string>
   <!-- Toast text for incoming call being forwarded to other remote party  -->
-  <string name="call_notif_MTcall_forwarding">來電通話已轉駁</string>
+  <string name="call_notif_MTcall_forwarding">來電通話已轉接</string>
   <!-- Toast text for incoming call which is part of MultiParty Call -->
   <string name="call_notif_multipartycall">多方通話</string>
   <!-- Toast text for incoming call which is answered,put on hold & then released -->
@@ -80,4 +80,8 @@
   <!-- Network mode picker dialog title -->
   <string name="choose_network_mode_title">選擇網路模式</string>
   <string name="choose_network_mode_system_default">系統預設</string>
+  <string name="cdma_call_settings">CDMA 通話設定</string>
+  <!-- Mobile network settings, COLP -->
+  <string name="connected_line_identification_title">已連線識別</string>
+  <string name="connected_line_identification_summary">如果對方號碼不在通話紀錄中顯示，停用此選項</string>
 </resources>
